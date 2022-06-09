@@ -2,6 +2,7 @@ package Goods.ValidateGoods;
 
 import Account.ValidateAccountt.ValidateaccountUser;
 import Goods.Classgoods.ClassGoods;
+import Goods.CreateGoods.MenuGuest;
 import Goods.ReaderAndWiterGoods.Readerandwiter;
 
 import java.util.ArrayList;
@@ -114,16 +115,38 @@ public class ValidateGoods {
 
     public static String amount (){
         while (true){
-            System.out.println("Nhập Số lượng sản phẩm ");
+            String amount = scanner.nextLine();
+            Pattern pattern = Pattern.compile(regexprice);
+            Matcher matcher = pattern.matcher(amount);
+            if (matcher.matches()){
+                for (ClassGoods c : classGoods){
+                    if (Integer.parseInt(amount)<= c.getAmount()){
+                        return amount;
+                    }
+                }
+                System.out.println("===== Không đủ số lượng hàng xin lỗi quý khách ====");
+                System.out.println("");
+                MenuGuest.Menu();
+            }
+            System.out.println("Chỉ nhập số lượng sản phẩm là kiểu dữ liệu số nguyên");
+            System.out.println("Nhập số lượng muốn mua ");
+        }
+    }
+    public static String amount1 (){
+        while (true){
+            System.out.print("Nhập số lượng sản phẩm :");
             String amount = scanner.nextLine();
             Pattern pattern = Pattern.compile(regexprice);
             Matcher matcher = pattern.matcher(amount);
             if (matcher.matches()){
                 return amount;
-            }
+                }
+            System.out.println("");
             System.out.println("Chỉ nhập số lượng sản phẩm là kiểu dữ liệu số nguyên");
+            System.out.print("Nhập số lượng sản phẩm :");
+            }
         }
     }
 
 
-}
+

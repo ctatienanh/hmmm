@@ -11,11 +11,18 @@ public class AccountUser implements Serializable {
     private String email;
     private String Telephone;
     private String address;
+    private String role;
 
     public AccountUser() {
     }
 
-    public AccountUser(String name, String sex, String age, String account, String pass, String email, String telephone, String address) {
+    public AccountUser(String account, String pass, String role){
+        this.account = account;
+        this.pass = pass;
+        this.role = role;
+    }
+
+    public AccountUser(String name, String sex, String age, String account, String pass, String email, String telephone, String address, String role) {
         this.name = name;
         this.sex = sex;
         this.age = age;
@@ -24,6 +31,15 @@ public class AccountUser implements Serializable {
         this.email = email;
         Telephone = telephone;
         this.address = address;
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getAge() {
@@ -100,6 +116,7 @@ public class AccountUser implements Serializable {
                 +" , Mật khẩu :" + pass
                 +" , Email : "+ email
                 +" , Điện thoại :"+ Telephone
-                +" , Địa chỉ : " +address ;
+                +" , Địa chỉ : " +address
+                +" , Quyền : " + role;
     }
 }

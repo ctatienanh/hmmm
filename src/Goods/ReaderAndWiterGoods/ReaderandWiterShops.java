@@ -8,14 +8,14 @@ import java.util.ArrayList;
 
 public class ReaderandWiterShops {
 
+    File file = new File("C:\\Users\\hp\\OneDrive\\Máy tính\\Shop.txt");
 
+    public void witer(ArrayList<ClassShop> goods){
 
-    public void witer(ArrayList<ClassShop> goods, String name1){
-        File file = new File(("C:\\Users\\hp\\OneDrive\\Máy tính\\")+(name1)+("Sản phẩm.txt"));
         try {
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            for (ClassGoods x : goods){
+            for (ClassShop x : goods){
                 bufferedWriter.write(x.toString());
                 bufferedWriter.newLine();
             }
@@ -26,9 +26,8 @@ public class ReaderandWiterShops {
         }
     }
 
-    public ArrayList<ClassShop> reader(String name1){
-        ArrayList<ClassShop> newclassGoods = new ArrayList<>();
-        File file = new File(("C:\\Users\\hp\\OneDrive\\Máy tính\\")+(name1)+("Sản phẩm.txt"));
+    public ArrayList<ClassShop> reader(){
+        ArrayList<ClassShop> newclassShops = new ArrayList<>();
         try {
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -39,7 +38,8 @@ public class ReaderandWiterShops {
                 int price = Integer.parseInt(arr[1]);
                 int amouts = Integer.parseInt(arr[2]);
                 String time = arr[3];
-                newclassGoods.add( new ClassShop(name,price,amouts,time));
+                int prices = Integer.parseInt(arr[5]);
+                newclassShops.add( new ClassShop(name,price,amouts,time,arr[4],prices));
                 list =  bufferedReader.readLine();
             }
             bufferedReader.close();
@@ -50,6 +50,9 @@ public class ReaderandWiterShops {
         } catch (IOException e) {
             System.out.print("");
         }
-        return newclassGoods;
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return newclassShops;
     }
 }

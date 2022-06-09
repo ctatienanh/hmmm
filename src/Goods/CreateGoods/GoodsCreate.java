@@ -17,6 +17,8 @@ public class GoodsCreate {
 
 
     public static void Menu(){
+        System.out.println("");
+        System.out.println("                         Nhân viên : "+Loginn.accountUser.getName() );
         System.out.println("     ====Menu nhân viên====");
         System.out.println("1:Thêm sản phẩm ");
         System.out.println("2:Hiện thị tất cả cá sản phẩm");
@@ -28,23 +30,31 @@ public class GoodsCreate {
 
         switch (Integer.parseInt(ValidateaccountUser.Choice())){
             case 1:
+                System.out.println("================ Add sản phẩm ================");
                 addGoods();
                 break;
             case 2:
+                System.out.println("================ Các Mặt Hàng ================");
                 showgoods();
                 break;
             case 3:
+                System.out.println("================ Edit sản phẩm ================");
                 Edit();
                 break;
             case 4:
+                System.out.println("================ Xóa sản phẩm ================");
                 Delete();
                 break;
             case 5:
+                System.out.println("================ Add số lượng sản phẩm ================");
                 EditAmount();
                 break;
             case 6:
+                System.out.println("================ hẹn gặp lại ================");
                 Loginn.Menu();
                 break;
+            default:
+                System.out.println("Không tìm thấy lựa chọn mời bạn nhập lại");
         }
     }
 
@@ -71,17 +81,19 @@ public class GoodsCreate {
         String battery = ValidateGoods.battery();
 
 
-        int amount = Integer.parseInt(ValidateGoods.amount());
+        int amount = Integer.parseInt(ValidateGoods.amount1());
 
         return new ClassGoods(brand,name,price,ram,battery,amount);
     }
 
     public static void addGoods(){
+        System.out.println("");
         classGoods.add(creat());
         readerandwiter.witer(classGoods);
         Menu();
     }
     public static void showgoods() {
+        System.out.println("");
         for (int i = 0; i < classGoods.size(); i++) {
             System.out.println("San pham  " + (i + 1) + ":");
             System.out.println("Hãng Laptop      : " + classGoods.get(i).getBrand());
@@ -108,18 +120,24 @@ public class GoodsCreate {
     }
 
     public static void Edit(){
+        System.out.println("");
      classGoods.set(checkid(),creat());
      readerandwiter.witer(classGoods);
      Menu();
     }
     public static void Delete(){
+        System.out.println("");
         classGoods.remove(checkid());
         readerandwiter.witer(classGoods);
         Menu();
     }
     public static void EditAmount(){
-        classGoods.get(checkid()).setAmount(Integer.parseInt(ValidateGoods.amount()));
+        System.out.println("");
+        classGoods.get(checkid()).setAmount(Integer.parseInt(ValidateGoods.amount1()));
         readerandwiter.witer(classGoods);
+        System.out.println("");
+        System.out.println("Thêm sản phẩm thành công");
+        System.out.println("------------------------");
         Menu();
     }
 

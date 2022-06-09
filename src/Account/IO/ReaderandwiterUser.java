@@ -1,19 +1,19 @@
-package Account.ReaderandWiterUser;
+package Account.IO;
 
-import Account.Accountsss.Accountpersonnel;
+import Account.Accountsss.AccountUser;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReaderandwriterAccount {
+public class ReaderandwiterUser {
+    public static void writer(List<AccountUser> accountUsers) {
 
-    public void writer(List<Accountpersonnel> accountpersonnels){
-        File file = new File("taikhoannv.txt");
+        File file = new File("C:\\Users\\hp\\OneDrive\\Máy tính\\taikhoankh.txt");
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(accountpersonnels);
+            objectOutputStream.writeObject(accountUsers);
             objectOutputStream.close();
             fileOutputStream.close();
 
@@ -23,21 +23,19 @@ public class ReaderandwriterAccount {
             throw new RuntimeException(e);
         }
     }
-    public ArrayList<Accountpersonnel> reader(){
-        FileInputStream fileInputStream = null;
+
+    public static ArrayList<AccountUser> reander() {
+
         try {
-            fileInputStream = new FileInputStream("taikhoannv.txt");
+            FileInputStream fileInputStream = new FileInputStream("C:\\Users\\hp\\OneDrive\\Máy tính\\taikhoankh.txt");
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            return (ArrayList<Accountpersonnel>) objectInputStream.readObject();
-        } catch (FileNotFoundException e) {
-            System.out.print("");
+            return  (ArrayList<AccountUser>) objectInputStream.readObject();
         } catch (IOException e) {
             System.out.print("");
         } catch (ClassNotFoundException e) {
-            System.out.print("");;
+            System.out.print("");
         }
         return new ArrayList<>();
     }
-
 
 }

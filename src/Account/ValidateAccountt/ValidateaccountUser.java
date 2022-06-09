@@ -1,8 +1,9 @@
 package Account.ValidateAccountt;
 
-import Account.ReaderandWiterUser.ReaderandwiterUser;
-import Account.ReaderandWiterUser.ReaderandwriterAccount;
+import Account.Accountsss.AccountUser;
+import Account.IO.ReaderandwiterUser;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,11 +16,12 @@ public class ValidateaccountUser {
     public static final String regexTelephone = "^84[0-9]{10}";
     public static final  String regexaddress = "[A-Za-z0-9]+";
     public static final String regexage = "[0-9][0-9]";
-    public static final String regexid = "[0-9]{12}";
     public static final String regexchoice = "[0-9]+";
     static Scanner scanner = new Scanner(System.in);
-    static ReaderandwiterUser readerandwiterUser = new ReaderandwiterUser();
-    static ReaderandwriterAccount readerandwriterAccount = new ReaderandwriterAccount();
+
+
+     static   ArrayList<AccountUser> accountUsers =  ReaderandwiterUser.reander();
+
 
     public static String name() {
         while (true) {
@@ -56,8 +58,8 @@ public class ValidateaccountUser {
             Pattern pattern = Pattern.compile(regexAccount);
             Matcher matcher = pattern.matcher(Account);
             if (matcher.matches()) {
-                for (int i = 0; i < readerandwiterUser.reander().size(); i++) {
-                    if (readerandwiterUser.reander().get(i).getAccount().equals(Account)) {
+                for (int i = 0; i < ReaderandwiterUser.reander().size(); i++) {
+                    if (ReaderandwiterUser.reander().get(i).getAccount().equals(Account)) {
                         System.out.println("đã có tài khoản đăng nhập này :");
                         account();
                     }
@@ -69,23 +71,7 @@ public class ValidateaccountUser {
     }
 
 
-    public static String accountpersonnel() {
-        while (true) {
-            String Account = scanner.nextLine();
-            Pattern pattern = Pattern.compile(regexAccount);
-            Matcher matcher = pattern.matcher(Account);
-            if (matcher.matches()) {
-                for (int i = 0; i < readerandwriterAccount.reader().size(); i++) {
-                    if (readerandwriterAccount.reader().get(i).getAccount().equals(Account)) {
-                        System.out.println("đã có tài khoản đăng nhập này :");
-                        accountpersonnel();
-                    }
-                }
-                return Account;
-            }
-            System.err.println("Nhập sai kiểu dữ liệu nhập lại ");
-        }
-    }
+
 
     public static String password() {
         while (true) {
@@ -101,7 +87,6 @@ public class ValidateaccountUser {
 
     public static String telephone() {
         while (true) {
-
             String telephone = scanner.nextLine();
             Pattern pattern = Pattern.compile(regexTelephone);
             Matcher matcher = pattern.matcher(telephone);
@@ -114,13 +99,14 @@ public class ValidateaccountUser {
 
     public static String email() {
         while (true){
+            System.out.print("+ Email         :");
             String email = scanner.nextLine();
             Pattern pattern = Pattern.compile(regexemail);
             Matcher matcher = pattern.matcher(email);
             if (matcher.matches()){
-                for(int i=0;i<readerandwiterUser.reander().size() ;i++){
-                    if (readerandwiterUser.reander().get(i).getEmail().equals(email)){
-                        System.out.println("email này đã tồn tại");
+                for(int i=1;i<accountUsers.size() ;i++){
+                    if (accountUsers.get(i).getEmail().equals(email)){
+                        System.out.println("email này đã tồn tại nhập lại");
                         email();
                     }
                 }
@@ -129,23 +115,7 @@ public class ValidateaccountUser {
             System.out.println("Nhập sai kiểu dữ liệu nhập lại");
         }
     }
-    public static String emailpersonnel() {
-        while (true){
-            String email = scanner.nextLine();
-            Pattern pattern = Pattern.compile(regexemail);
-            Matcher matcher = pattern.matcher(email);
-            if (matcher.matches()){
-                for(int i=0;i<readerandwriterAccount.reader().size() ;i++){
-                    if (readerandwriterAccount.reader().get(i).getEmail().equals(email)){
-                        System.out.println("email này đã tồn tại");
-                        emailpersonnel();
-                    }
-                }
-                return email;
-            }
-            System.out.println("Nhập sai kiểu dữ liệu nhập lại");
-        }
-    }
+
 
     public static String address(){
         while (true){
@@ -170,41 +140,6 @@ public class ValidateaccountUser {
         }
     }
 
-    public static String id(){
-    while (true){
-        String id = scanner.nextLine();
-        Pattern pattern = Pattern.compile(regexid);
-        Matcher matcher = pattern.matcher(id);
-        if (matcher.matches()){
-       for (int i =0; i< readerandwriterAccount.reader().size();i++){
-        if (readerandwriterAccount.reader().get(i).getId().equals(id)){
-            System.out.println("Số chứng minh thư này đã tồn tại ");
-            id();
-        }
-       }
-            return id;
-        }
-        System.out.println("Nhập sai kiểu dữ liệu nhập lại");
-      }
-    }
-
-    public static String position(){
-        while (true) {
-            System.out.println("-------------");
-            System.out.println("1: Nhân viên bán hàng");
-            System.out.println("2: Nhân viên thu ngân ");
-            System.out.println("-------------");
-            System.out.println("Nhập lựa chọn của bạn: ");
-            switch (Integer.parseInt(Choice())) {
-                case 1:
-                    return "Nhân viên bán hàng";
-                case 2:
-                    return "Nhân viên thu ngân";
-                default:
-                    System.out.println("không tim thấy lựa chọn nhập lại");
-            }
-        }
-    }
 
     public static String Choice() {
         while (true) {
