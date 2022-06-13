@@ -7,10 +7,9 @@ public class ClassShop extends  ClassGoods{
     private String account;
     private int prices;
 
-    public ClassShop( String name, int price, int amounts, String time, String account,int prices) {
+    public ClassShop( String name, int price, int amounts, String account,int prices) {
         super( name, price);
         this.amounts = amounts;
-        this.time = time;
         this.account = account;
         this.prices = prices;
     }
@@ -49,6 +48,6 @@ public class ClassShop extends  ClassGoods{
 
     @Override
     public String toString() {
-        return super.getName()+ ","+ super.getPrice()+"," +  amounts + "," + time + "," + account +","+prices ;
+        return super.getName()+ ","+ super.getPrice()+"," +  amounts  + "," + account +","+prices ;
     }
 }

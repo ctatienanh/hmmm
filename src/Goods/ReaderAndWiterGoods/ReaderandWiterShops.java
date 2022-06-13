@@ -37,9 +37,8 @@ public class ReaderandWiterShops {
                 String name = arr[0];
                 int price = Integer.parseInt(arr[1]);
                 int amouts = Integer.parseInt(arr[2]);
-                String time = arr[3];
-                int prices = Integer.parseInt(arr[5]);
-                newclassShops.add( new ClassShop(name,price,amouts,time,arr[4],prices));
+                int prices = Integer.parseInt(arr[4]);
+                newclassShops.add( new ClassShop(name,price,amouts,arr[3],prices));
                 list =  bufferedReader.readLine();
             }
             bufferedReader.close();

@@ -15,6 +15,7 @@ public class ValidateGoods {
     static ArrayList<ClassGoods> classGoods = readerandwiter.reader();
     static Scanner scanner = new Scanner(System.in);
     private static final String regexprice = "[0-9]+";
+    private static final String regexname = "[A-Za-z0-9]+";
 
 
 
@@ -30,7 +31,21 @@ public class ValidateGoods {
             return name;
         }
     }
-
+    public static String NameShop(){
+        while (true){
+            String name = scanner.nextLine();
+            Pattern pattern = Pattern.compile(regexname);
+            Matcher matcher = pattern.matcher(name);
+            if (matcher.matches()) {
+                for (int i=0; i <readerandwiter.reader().size(); i++){
+                    if (readerandwiter.reader().get(i).getName().equals(name)){
+                        return name;
+                    }
+                }
+            }
+            System.out.println("Không tìm thấy tên sản phẩm nhập lại");
+        }
+    }
 
 
 
@@ -113,28 +128,10 @@ public class ValidateGoods {
         }
     }
 
-    public static String amount (){
-        while (true){
-            String amount = scanner.nextLine();
-            Pattern pattern = Pattern.compile(regexprice);
-            Matcher matcher = pattern.matcher(amount);
-            if (matcher.matches()){
-                for (ClassGoods c : classGoods){
-                    if (Integer.parseInt(amount)<= c.getAmount()){
-                        return amount;
-                    }
-                }
-                System.out.println("===== Không đủ số lượng hàng xin lỗi quý khách ====");
-                System.out.println("");
-                MenuGuest.Menu();
-            }
-            System.out.println("Chỉ nhập số lượng sản phẩm là kiểu dữ liệu số nguyên");
-            System.out.println("Nhập số lượng muốn mua ");
-        }
-    }
+
     public static String amount1 (){
         while (true){
-            System.out.print("Nhập số lượng sản phẩm :");
+            System.out.println("Nhập số lượng sản phẩm :");
             String amount = scanner.nextLine();
             Pattern pattern = Pattern.compile(regexprice);
             Matcher matcher = pattern.matcher(amount);

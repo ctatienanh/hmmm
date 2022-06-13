@@ -25,22 +25,26 @@ public class Loginn {
     }
     public static void Menu(){
         System.out.println("");
-        System.out.println("    =====Login=====");
-        System.out.println("    1 :Đăng nhập");
-        System.out.println("    2 :Đăng kí ");
-        System.out.println("    3 :Quên mật khẩu ");
-        System.out.println("     Nhập Lựa chọn");
+        System.out.println("    ======Login=========");
+        System.out.println("     1 :Đăng nhập     ");
+        System.out.println("     2 :Đăng kí       ");
+        System.out.println("     3 :Quên mật khẩu  ");
+        System.out.println("    ---------------------");
+        System.out.print("     Nhập Lựa chọn :");
         switch (Integer.parseInt(ValidateaccountUser.Choice())){
             case 1:
+                System.out.println("");
                 System.out.println("================ Đăng nhập ================");
                 login();
                 break;
             case 2:
+                System.out.println("");
                 System.out.println("================ Đăng kí ================");
                 addAccount(User);
                 Menu();
                 break;
             case 3:
+                System.out.println("");
                 System.out.println("================ Quên mật khẩu ================");
                 forgotpassword();
                 break;
@@ -54,15 +58,20 @@ public class Loginn {
         System.out.println("1:Hiển thị tài khoản khách hàng");
         System.out.println("2:Hiển thị tài khoản nhân viên");
         System.out.println("3:Tạo tài khoản nhân viên");
-        System.out.println("4:Sửa tài khoản ");
-        System.out.println("5:Xóa tài khoản ");
+        System.out.println("4:Sửa tài khoản nhân viên ");
+        System.out.println("5:Xóa tài khoản nhân viên ");
         System.out.println("6:Đăng xuất");
-        System.out.println("Nhâp lựa chọn :");
+        System.out.println("---------------------------");
+        System.out.print("Nhâp lựa chọn :");
         switch (Integer.parseInt(ValidateaccountUser.Choice())){
             case 1:
+                System.out.println("       --------------------------------------------------");
+                System.out.println("         Thông tin các account khách hàng hiện tại :");
                 ShowUserkhachhang(User);
                 break;
             case 2:
+                System.out.println("       --------------------------------------------------");
+                System.out.println("         Thông tin các account nhân viên hiện tại :");
                 ShowUserkhachhang(role);
                 break;
             case 3:
@@ -70,7 +79,7 @@ public class Loginn {
                 Menuadmin();
                 break;
             case 4:
-                EditAccountUser(User);
+                EditAccountUser(role);
                 break;
             case 5:
                 DeleteaccountUser();
@@ -83,7 +92,8 @@ public class Loginn {
         }
     }
     public static boolean login(){
-        System.out.println("     ===Đăng nhập===");
+        accountUsers = ReaderandwiterUser.reander();
+        Loginn.accountUser=null;
         System.out.print("Tài Khoản :");
         String account = scanner.nextLine();
         System.out.print("Mật Khẩu  :");
@@ -102,6 +112,7 @@ public class Loginn {
         System.out.println("              -----------------------------------");
         System.out.println("                  Không tìm thấy tài khoản");
         System.out.println("              ------------------------------------");
+        Loginn.accountUser=null;
        return false;
     }
 
@@ -142,14 +153,13 @@ public class Loginn {
         String email = ValidateaccountUser.email();
 
         System.out.println("Nhập số điện thoại");
-        System.out.println("** số điện thoại gồm đầu 84 và 10 số ở đuôi **");
+        System.out.println("** số điện thoại gồm 10 so **");
         System.out.println("+ Điện Thoại  : ");
         String telephone = ValidateaccountUser.telephone();
 
         System.out.println("Nhập địa chỉ");
         System.out.print("+ Địa chỉ     :");
         String address = ValidateaccountUser.address();
-
 
         return new AccountUser(name,sex,age,accout,passwrod,email,telephone,address,role);
     }
@@ -170,6 +180,7 @@ public class Loginn {
         System.out.println("---------------------------------");
         System.out.print(   "Nhập email :" );
         String email = scanner.nextLine();
+        boolean checkk = true;
         for (int i = 1; i < ReaderandwiterUser.reander().size(); i++) {
             if (ReaderandwiterUser.reander().get(i).getEmail().equals(email)) {
                 System.out.println("");
@@ -178,11 +189,13 @@ public class Loginn {
                 System.out.println("Account  : "+ ReaderandwiterUser.reander().get(i).getAccount());
                 System.out.println("Password : "+ ReaderandwiterUser.reander().get(i).getPass());
                 System.out.println("----------------------------------");
-                Menu();
+                checkk=false;
             }
         }
-        System.out.println("-----------------------------------------");
-        System.out.println("     Không tìm thấy tài khoản bạn cần tìm ");
+        if (checkk==true) {
+            System.out.println("-----------------------------------------");
+            System.out.println("     Không tìm thấy tài khoản bạn cần tìm ");
+        }
         Menu();
     }
 
@@ -199,10 +212,10 @@ public class Loginn {
 
     public static void EditAccountUser(String role){
         System.out.println("-----------------------------------------");
-        System.out.println("    Nhập account khách hàng cần sửa :");
+        System.out.println("    Nhập account nhân viên cần sửa :");
         String name = scanner.nextLine();
         if (checkidaccountUser(name) != -1) {
-            accountUsers.set(checkidaccountUser(name),Loginn.UserCread(role) );
+            accountUsers.set(checkidaccountUser(name),Loginn.UserCread(role));
             ReaderandwiterUser.writer(accountUsers);
         } else {
             System.out.println("-----------------------------------------");
@@ -214,7 +227,7 @@ public class Loginn {
 
     public static void DeleteaccountUser(){
         System.out.println("-----------------------------------------");
-        System.out.println("    Nhập account khách hàng cần xóa :");
+        System.out.println("    Nhập account nhân viên cần xóa :");
         String name = scanner.nextLine();
         if (checkidaccountUser(name) != -1) {
             System.out.println("Bạn có chắc chắn muốn xóa tài khoản :" + name);
@@ -242,12 +255,10 @@ public class Loginn {
     }
 
     public static void ShowUserkhachhang(String role){
-        System.out.println("        -----------------------------------");
-        System.out.println("         Thông tin các account hiện tại :");
+
         System.out.println("");
         for (int i=0; i<ReaderandwiterUser.reander().size(); i++) {
             if (ReaderandwiterUser.reander().get(i).getRole().equals(role)) {
-                System.out.println("Khach hang thứ  " + (i + 1) + ":");
                 System.out.println("Tên            : " + ReaderandwiterUser.reander().get(i).getName());
                 System.out.println("Giới tính      : " + ReaderandwiterUser.reander().get(i).getSex());
                 System.out.println("Tuổi           : " + ReaderandwiterUser.reander().get(i).getAge());

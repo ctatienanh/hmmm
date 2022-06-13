@@ -13,7 +13,7 @@ public class ValidateaccountUser {
     public static final String regexAccount = "[A-Za-z0-9]{6,10}";
     public static final String regexpassword = "[A-Za-z0-9]+";
     public static final String regexemail = "[A-Za-z0-9]+@[a-z]+.[a-z]+";
-    public static final String regexTelephone = "^84[0-9]{10}";
+    public static final String regexTelephone = "[0-9]{10}";
     public static final  String regexaddress = "[A-Za-z0-9]+";
     public static final String regexage = "[0-9][0-9]";
     public static final String regexchoice = "[0-9]+";
@@ -148,7 +148,7 @@ public class ValidateaccountUser {
             Matcher matcher = pattern.matcher(choice);
             if (matcher.matches()) {
                 return choice;
-            } else System.out.println("Chỉ nhập kí tự là số ");
+            } else System.out.println("Chỉ nhập kí tự là số nhập lại ");
         }
     }
 

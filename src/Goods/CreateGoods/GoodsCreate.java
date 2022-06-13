@@ -24,8 +24,9 @@ public class GoodsCreate {
         System.out.println("2:Hiện thị tất cả cá sản phẩm");
         System.out.println("3:Sửa sản phẩm ");
         System.out.println("4:Xóa sản phẩm ");
-        System.out.println("5:Thêm số lượng sản phẩm");
-        System.out.println("6:Đăng xuất");
+        System.out.println("5:Sản phẩm còn ít");
+        System.out.println("6:Sửa số lượng sản phẩm");
+        System.out.println("7:Đăng xuất");
         System.out.println("Nhập lựa chọn");
 
         switch (Integer.parseInt(ValidateaccountUser.Choice())){
@@ -36,6 +37,7 @@ public class GoodsCreate {
             case 2:
                 System.out.println("================ Các Mặt Hàng ================");
                 showgoods();
+                Menu();
                 break;
             case 3:
                 System.out.println("================ Edit sản phẩm ================");
@@ -46,15 +48,20 @@ public class GoodsCreate {
                 Delete();
                 break;
             case 5:
+                System.out.println("================ Các sản phẩm còn ít ================");
+                show();
+                break;
+            case 6:
                 System.out.println("================ Add số lượng sản phẩm ================");
                 EditAmount();
                 break;
-            case 6:
+            case 7:
                 System.out.println("================ hẹn gặp lại ================");
                 Loginn.Menu();
                 break;
             default:
                 System.out.println("Không tìm thấy lựa chọn mời bạn nhập lại");
+                Menu();
         }
     }
 
@@ -94,23 +101,38 @@ public class GoodsCreate {
     }
     public static void showgoods() {
         System.out.println("");
-        for (int i = 0; i < classGoods.size(); i++) {
+        for (int i = 0; i < readerandwiter.reader().size(); i++) {
             System.out.println("San pham  " + (i + 1) + ":");
-            System.out.println("Hãng Laptop      : " + classGoods.get(i).getBrand());
-            System.out.println("Tên Laptop       : " + classGoods.get(i).getName());
-            System.out.println("Giá tiền         : " + classGoods.get(i).getPrice());
-            System.out.println("Ram Laptop       : " + classGoods.get(i).getRam());
-            System.out.println("Dung lượng pin   : " + classGoods.get(i).getPrice());
-            System.out.println("Số lượng tồn kho : " + classGoods.get(i).getAmount());
+            System.out.println("Hãng Laptop      : " + readerandwiter.reader().get(i).getBrand());
+            System.out.println("Tên Laptop       : " + readerandwiter.reader().get(i).getName());
+            System.out.println("Giá tiền         : " + readerandwiter.reader().get(i).getPrice()+" VNĐ");
+            System.out.println("Ram Laptop       : " + readerandwiter.reader().get(i).getRam());
+            System.out.println("Dung lượng pin   : " + readerandwiter.reader().get(i).getPrice());
+            System.out.println("Số lượng tồn kho : " + readerandwiter.reader().get(i).getAmount());
             System.out.println("-----------------------------------------------");
             System.out.println("");
+        }
+    }
+    public static void show(){
+        System.out.println("");
+        for (int i = 0; i < readerandwiter.reader().size(); i++) {
+            if ((readerandwiter.reader().get(i).getAmount()) <5) {
+                System.out.println("San pham  " + (i + 1) + ":");
+                System.out.println("Hãng Laptop      : " + readerandwiter.reader().get(i).getBrand());
+                System.out.println("Tên Laptop       : " + readerandwiter.reader().get(i).getName());
+                System.out.println("Giá tiền         : " + readerandwiter.reader().get(i).getPrice() + " VNĐ");
+                System.out.println("Ram Laptop       : " + readerandwiter.reader().get(i).getRam());
+                System.out.println("Dung lượng pin   : " + readerandwiter.reader().get(i).getPrice());
+                System.out.println("Số lượng tồn kho : " + readerandwiter.reader().get(i).getAmount());
+                System.out.println("-----------------------------------------------");
+                System.out.println("");
+            }
         }
         Menu();
     }
 
-    public static int checkid(){
-        System.out.println("Nhập tên sản phẩm ");
-        String name = scanner.nextLine();
+    public static int checkid(String name){
+
         for (int i=0; i< classGoods.size(); i++){
             if (classGoods.get(i).getName().equals(name)){
                 return i;
@@ -121,23 +143,47 @@ public class GoodsCreate {
 
     public static void Edit(){
         System.out.println("");
-     classGoods.set(checkid(),creat());
-     readerandwiter.witer(classGoods);
-     Menu();
+        System.out.println("Nhập tên sản phẩm ");
+        String name = scanner.nextLine();
+        if (checkid(name)!=-1) {
+            classGoods.set(checkid(name), creat());
+            readerandwiter.witer(classGoods);
+        }else {
+            System.out.println("");
+            System.out.println("---------------------------------");
+            System.out.println("  Không tìm thấy tên sản phẩm");
+        }
+            Menu();
     }
     public static void Delete(){
         System.out.println("");
-        classGoods.remove(checkid());
-        readerandwiter.witer(classGoods);
+        System.out.println("Nhập tên sản phẩm ");
+        String name = scanner.nextLine();
+        if (checkid(name)!=-1) {
+            classGoods.remove(checkid(name));
+            readerandwiter.witer(classGoods);
+        }else {
+            System.out.println("");
+            System.out.println("---------------------------------");
+            System.out.println("  Không tìm thấy tên sản phẩm");
+        }
         Menu();
     }
     public static void EditAmount(){
         System.out.println("");
-        classGoods.get(checkid()).setAmount(Integer.parseInt(ValidateGoods.amount1()));
-        readerandwiter.witer(classGoods);
-        System.out.println("");
-        System.out.println("Thêm sản phẩm thành công");
-        System.out.println("------------------------");
+        System.out.println("Nhập tên sản phẩm ");
+        String name = scanner.nextLine();
+        if (checkid(name)!=-1) {
+            classGoods.get(checkid(name)).setAmount(Integer.parseInt(ValidateGoods.amount1()));
+            readerandwiter.witer(classGoods);
+            System.out.println("");
+            System.out.println("Thêm sản phẩm thành công");
+            System.out.println("------------------------");
+        }else {
+            System.out.println("");
+            System.out.println("---------------------------------");
+            System.out.println("  Không tìm thấy tên sản phẩm");
+        }
         Menu();
     }
 

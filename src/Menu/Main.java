@@ -7,7 +7,6 @@ import Login.Loginn;
 
 public class Main {
     public static void main(String[] args) {
-
         Loginn loginn = new Loginn();
         while (true){
             if (Loginn.accountUser == null ){
@@ -25,4 +24,5 @@ public class Main {
             }
         }
     }
+
 }
